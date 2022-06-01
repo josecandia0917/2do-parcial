@@ -6,7 +6,12 @@ import com.emergentes.dao.SeminariosDAOimpl;
 import com.emergentes.modelo.Seminarios;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,34 +74,53 @@ public class SeminariosControlador extends HttpServlet {
         String fecha = request.getParameter("fecha");
         int cupo = Integer.parseInt(request.getParameter("cupo"));
         
-        
-        
+
         Seminarios sem  = new Seminarios();
         
         sem.setId(id);
         sem.setTitulo(titulo);
-        sem.setFecha(fecha);
+        sem.setFecha(convierteFecha(fecha));
         sem.setCupo(cupo);
  
-        SeminariosDAO dao = new SeminariosDAOimpl();
+        
         if(id == 0){
+            SeminariosDAO dao = new SeminariosDAOimpl();
             try {
                 // nuevo registro
 
                 dao.insert(sem);
+                response.sendRedirect("SeminariosControlador");
             } catch (Exception ex) {
                 System.out.println("Error al insertar " +ex.getMessage());
             }
+            
         }else {
+            SeminariosDAO dao = new SeminariosDAOimpl();
             try {
                 // ediciion
                 dao.update(sem);
+                response.sendRedirect("SeminariosControlador");
             } catch (Exception ex) {
                System.out.println("Error al editar " +ex.getMessage());
             }
         }
-        response.sendRedirect("SeminariosControlador");
+        
     }
 
-
+    public Date convierteFecha (String fecha){
+         Date fechaBD = null;
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            
+            java.util.Date fechaTMP;
+        try {
+            fechaTMP = formato.parse(fecha);
+            fechaBD = new Date (fechaTMP.getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(SeminariosControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+            return fechaBD;
+        }
 }
+

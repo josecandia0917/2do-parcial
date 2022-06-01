@@ -20,25 +20,17 @@
                 <jsp:param name="opcion" value="seminarios" />
             </jsp:include>
             <br>
-            <a href="#" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-plus"></i> Nuevo </a>
+            
             <br>
             <table class="table table-striped">
                 <tr>
-                    <th>ID</th>
-                    <th>TITULO</th>
-                    <th>FECHA</th>
-                    <th>CUPO</th>
-                    <th></th>
-                    <th></th>
+                    <th>SEGUNDO PARCIAL TEM-742</th>
+                    <th>NOMBRE: JOSE MAMANI CANDIA</th>
+                    <th>CARNET: 9072151 LP</th>
+                    
+                    
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="#"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                    <td><a href="#"><i class="fa-solid fa-delete-left"></i></a></td>
-                </tr>
+
             </table>
         </div>
 
